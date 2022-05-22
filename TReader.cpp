@@ -19,37 +19,6 @@ void TReader::setNameFile( string fileName )
 
 bool TReader::getTransaction( vector<int>& transaction )
 {
-   //if ( fileManager.eof() )
-   //   return true;
-   //
-   //getline( fileManager, fileLine );
-
-
-   //transaction.clear();
-
-   //fileLine.erase( remove_if( fileLine.begin(),       // Удаление не алфавитных символов с использованием предиката
-   //                fileLine.end(),
-   //                []( char c )
-   //                {
-   //                   if ( c == ',' )
-   //                      return true;
-   //                   else
-   //                      return false;
-   //                } ),
-   //                fileLine.end() );
-
-   //size_t sizeTrans = fileLine.size();
-   //transaction.resize( sizeTrans );       // тут скорее всего ресайз надо 1 раз всего делать( Но это не точно )
-
-   //int pos = 0;                           // позиция значения в транзакции t
-
-   //for ( int a = 0; a < sizeTrans; ++a )
-   //{
-   //   transaction[a] = static_cast< int >( fileLine[a] ) + 26 * pos - start_char + 1;
-   //   ++pos;
-   //}
-
-   //return false;
    string line;
    char c;
    int pos = 0;
@@ -71,7 +40,7 @@ bool TReader::getTransaction( vector<int>& transaction )
       {
          if ( c != '?' )
          {
-            unsigned int data = static_cast<int>( c ) - start_char + 1;
+            unsigned int data = static_cast<int>( c ) - startPos + 1;
             data = data + 26 * pos;
             transaction.push_back( data );
          }

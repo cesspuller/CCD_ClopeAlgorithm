@@ -8,52 +8,52 @@
 
 using namespace std;
 
-//! Интерфейс для создателя объектов чтения из файла
+//! РРЅС‚РµСЂС„РµР№СЃ РґР»СЏ СЃРѕР·РґР°С‚РµР»СЏ РѕР±СЉРµРєС‚РѕРІ С‡С‚РµРЅРёСЏ РёР· С„Р°Р№Р»Р°
 class TIAbstractReadOnDeviceCreator
 {
    public:
 
-   //! Виртуальный деструктор 
+   //! Р’РёСЂС‚СѓР°Р»СЊРЅС‹Р№ РґРµСЃС‚СЂСѓРєС‚РѕСЂ 
    virtual ~TIAbstractReadOnDeviceCreator() = default;
 
-   //! Функция создания объектов
+   //! Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ
    virtual TBaseReader* create() const = 0;
 };
 
-//! Шаблонный класс создания объектов 
+//! РЁР°Р±Р»РѕРЅРЅС‹Р№ РєР»Р°СЃСЃ СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ 
 template<typename readerType>
 class TReadOnDeviceCreator final : public TIAbstractReadOnDeviceCreator
 {
-   //! Функция создания объектов
+   //! Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ
    TBaseReader* create() const override
    {
       return new readerType();
    };
 };
 
-//! Фабрика объектов 
+//! Р¤Р°Р±СЂРёРєР° РѕР±СЉРµРєС‚РѕРІ 
 class TFactory
 {
    protected:
 
-   typedef map<string, TIAbstractReadOnDeviceCreator*> factoryMap;     //<! Сокращение записи 
-   factoryMap factory;                                                 //<! Хранилище доступных объектов 
+   typedef map<string, TIAbstractReadOnDeviceCreator*> factoryMap;     //<! РЎРѕРєСЂР°С‰РµРЅРёРµ Р·Р°РїРёСЃРё 
+   factoryMap factory;                                                 //<! РҐСЂР°РЅРёР»РёС‰Рµ РґРѕСЃС‚СѓРїРЅС‹С… РѕР±СЉРµРєС‚РѕРІ 
 
    public:
 
-   //! Конструктор         
+   //! РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ         
    TFactory()
    {
       this->add<TReader>( mashroomType );
    };
 
-   //! Деструктор 
+   //! Р”РµСЃС‚СЂСѓРєС‚РѕСЂ 
    ~TFactory()
    {
    };
 
-   //! Функция добавления возможных комбинаций [ключ-класс]
-   //! id - тип класс для поиска ключа
+   //! Р¤СѓРЅРєС†РёСЏ РґРѕР±Р°РІР»РµРЅРёСЏ РІРѕР·РјРѕР¶РЅС‹С… РєРѕРјР±РёРЅР°С†РёР№ [РєР»СЋС‡-РєР»Р°СЃСЃ]
+   //! id - С‚РёРї РєР»Р°СЃСЃ РґР»СЏ РїРѕРёСЃРєР° РєР»СЋС‡Р°
    template<typename readerType>
    void add( const string& id )
    {
@@ -63,9 +63,9 @@ class TFactory
          factory[id] = new TReadOnDeviceCreator<readerType>;
    };
 
-   //! Функция создания объектов по id
-   //! findKeyParams - структура параметров для преобразования Фурье
-   //! return - указатель на объект фабрики
+   //! Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ РѕР±СЉРµРєС‚РѕРІ РїРѕ id
+   //! findKeyParams - СЃС‚СЂСѓРєС‚СѓСЂР° РїР°СЂР°РјРµС‚СЂРѕРІ РґР»СЏ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёСЏ Р¤СѓСЂСЊРµ
+   //! return - СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РѕР±СЉРµРєС‚ С„Р°Р±СЂРёРєРё
    TBaseReader* create( string typeReader )
    {
       factoryMap::iterator it = factory.find( typeReader );
@@ -78,7 +78,7 @@ class TFactory
 
    private:
 
-   const string mashroomType = "MR";              //!< Идентификатор для класса чтения "задача про грибы"  
+   const string mashroomType = "MR";              //!< РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ РґР»СЏ РєР»Р°СЃСЃР° С‡С‚РµРЅРёСЏ "Р·Р°РґР°С‡Р° РїСЂРѕ РіСЂРёР±С‹"  
 };
 
 #endif // _T_HPP_FACTORY_READER_

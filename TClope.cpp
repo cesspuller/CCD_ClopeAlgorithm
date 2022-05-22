@@ -1,5 +1,5 @@
 #include "TClope.hpp"
-//! Алиас для более короткой записи
+//! РђР»РёР°СЃ РґР»СЏ Р±РѕР»РµРµ РєРѕСЂРѕС‚РєРѕР№ Р·Р°РїРёСЃРё
 using UCluster = shared_ptr<TCluster>;
 void TClope::exec()
 {
@@ -8,7 +8,7 @@ void TClope::exec()
    UCluster nextCluster = nullptr;
    UCluster curentCluster = nullptr;
    
-   // Первая фаза алгоритма
+   // РџРµСЂРІР°СЏ С„Р°Р·Р° Р°Р»РіРѕСЂРёС‚РјР°
    while ( fileReader->getTransaction( transaction ) )
    {
       firstStage( transaction, curentCluster, 0 );
@@ -22,12 +22,12 @@ void TClope::exec()
    f = profit();
    cout << "Profit = " << f << endl;
 
-   // Уточняющая фаза алгоритма -
-   while( moved ) // Внешний цикл повторения проходов по хранилищу 
+   // РЈС‚РѕС‡РЅСЏСЋС‰Р°СЏ С„Р°Р·Р° Р°Р»РіРѕСЂРёС‚РјР° -
+   while( moved ) // Р’РЅРµС€РЅРёР№ С†РёРєР» РїРѕРІС‚РѕСЂРµРЅРёСЏ РїСЂРѕС…РѕРґРѕРІ РїРѕ С…СЂР°РЅРёР»РёС‰Сѓ 
    {
       fileReader->returnStart();
 
-      while ( fileReader->getTransaction( transaction ))       // Внутренний цикл, перерасчёт костов и перемещение транзакций
+      while ( fileReader->getTransaction( transaction ))       // Р’РЅСѓС‚СЂРµРЅРЅРёР№ С†РёРєР», РїРµСЂРµСЂР°СЃС‡С‘С‚ РєРѕСЃС‚РѕРІ Рё РїРµСЂРµРјРµС‰РµРЅРёРµ С‚СЂР°РЅР·Р°РєС†РёР№
       {
          nextCluster = Profit2Stage( transaction, curentCluster );
 
@@ -42,7 +42,7 @@ void TClope::exec()
                {
                   clusters.push_back( TCluster::newCluster() );
                }
-            }           // проверить что в векторе останется по крайней мере 1 пустой кластер
+            }           // РїСЂРѕРІРµСЂРёС‚СЊ С‡С‚Рѕ РІ РІРµРєС‚РѕСЂРµ РѕСЃС‚Р°РЅРµС‚СЃСЏ РїРѕ РєСЂР°Р№РЅРµР№ РјРµСЂРµ 1 РїСѓСЃС‚РѕР№ РєР»Р°СЃС‚РµСЂ
 
             curentCluster->deleteTransaction( transaction );
             nextCluster->insertTransaction( transaction );

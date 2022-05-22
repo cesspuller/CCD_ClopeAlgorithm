@@ -10,7 +10,7 @@ shared_ptr<TCluster> TCluster::newCluster()
    return make_shared<TCluster>();
 };
 
-double TCluster::costAdd( vector<int>& transaction, float r )
+double TCluster::costAdd( vector<int>& transaction, double r )
 {
    double result = 0.0;
 
@@ -31,12 +31,12 @@ double TCluster::costAdd( vector<int>& transaction, float r )
    if ( W == 0 )
       result = curentS * ( N + 1 ) / pow( curentW, r );
    else
-      result = curentS * ( N + 1 ) / pow( curentW, r ) - S * N / pow( W , r ); // Без условия скинет nan
+      result = curentS * ( N + 1 ) / pow( curentW, r ) - S * N / pow( W , r ); // Р‘РµР· СѓСЃР»РѕРІРёСЏ СЃРєРёРЅРµС‚ nan
 
    return result;
 }
 
-double TCluster::costDel( vector<int>& transaction, float r )
+double TCluster::costDel( vector<int>& transaction, double r )
 {
    double result = 0.0;
 
@@ -57,7 +57,7 @@ double TCluster::costDel( vector<int>& transaction, float r )
    if ( W == 0 )
       result = -curentS * N / pow( curentW, r );
    else
-      result = curentS * ( N - 1 ) / pow( curentW, r ) - S * N / pow( W, r ); // Без условия скинет nan
+      result = curentS * ( N - 1 ) / pow( curentW, r ) - S * N / pow( W, r ); // Р‘РµР· СѓСЃР»РѕРІРёСЏ СЃРєРёРЅРµС‚ nan
 
    return result;
 };
@@ -87,8 +87,8 @@ void TCluster::insertTransaction( vector<int>& transaction )
 
 void TCluster::deleteTransaction(vector<int>& transaction)
 {
-   --N;                       // уменьшить кол во транзакций внутри кластера
-   S -= transaction.size();   // уменьшить количество объктов внутри кластера
+   --N;                       // СѓРјРµРЅСЊС€РёС‚СЊ РєРѕР» РІРѕ С‚СЂР°РЅР·Р°РєС†РёР№ РІРЅСѓС‚СЂРё РєР»Р°СЃС‚РµСЂР°
+   S -= transaction.size();   // СѓРјРµРЅСЊС€РёС‚СЊ РєРѕР»РёС‡РµСЃС‚РІРѕ РѕР±СЉРєС‚РѕРІ РІРЅСѓС‚СЂРё РєР»Р°СЃС‚РµСЂР°
 
    const map<int, int>::iterator OccEnd = Occ.end();
 
