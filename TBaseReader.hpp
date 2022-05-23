@@ -22,9 +22,6 @@ class TBaseReader
       //! Интерфейс функции получения транзакции 
       virtual bool getTransaction( vector<int>& transaction ) = 0;
 
-      //! Интерфейс функции возврата коретки потока ввода в начало файла
-      virtual void returnStart() = 0;
-
    private:
 
 };

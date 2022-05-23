@@ -57,8 +57,3 @@ TReader::~TReader()
    fileManager.close();
 };
 
-void TReader::returnStart()
-{
-   fileManager.seekg( 0 );
-};
-

@@ -24,17 +24,21 @@ class TFileDispatcher
       //! clusterId - индентификационный номер кластера, к которому будет отнесена данная транзакция.
       void writeTransactionInfo( vector<int>& transaction, int clusterId );
 
-      //! Коммент
-      void writeClusterId( int clusterId );
-      
-      //! Функция возвращающая указатели чтения/записи потока ввода/вывода в начало
-      void setSeekToBegin();
+      //! Функция считывающая транзакцию и номер кластера из временного хранилища 
+      //! transaction - транзакция считанная из файла и ассоциированная с - clusterId
+      bool readTransactionInfo( vector<int>& transaction, int& clusterId );
+
+      //! Функция, которая перезаписывает id кластера у последней считанной транзакции 
+      void overwriteClusterId( int clusterId );
+
+      //! Фукнция возврата кареток в начало файла 
+      void return2Begin();
 
    private:
 
-      streamoff startPos;                          //!< Позиция указателя в момент начала чтения 
-      streamoff stopPos;                           //!< Позиция указателя в момент конца чтения 
-      ofstream fileDispatcher;                     //!< поток вывода иформации о кластерах
+      fpos<_Mbstatet> startPos;                    //!< Позиция указателя в момент начала чтения 
+      fpos<_Mbstatet> stopPos;                     //!< Позиция указателя в момент конца чтения 
+      fstream fileDispatcher;                      //!< поток вывода иформации о кластерах
       const int sep = 0;                           //!< разделитель между транзакциями
 };
 

@@ -37,7 +37,7 @@ class TClope
       //! transaction - Текущая транзакция.
       //! curentCluster - Текущий кластер
       //! return - ссылка на текущий выбранный кластер, для которого стоимость данной транзакции лучшая 
-      UCluster& Profit2Stage( vector<int>& transaction, UCluster& curentCluster );
+      UCluster Profit2Stage( vector<int>& transaction, UCluster& curentCluster );
 
       //! Функция вычисления профита
       double profit();
@@ -47,7 +47,7 @@ class TClope
       TFactory factory;                        //!< Объект фабрики создания классов чтения
       TBaseReader* fileReader;                 //!< Указатель на базовый класс объектов ( симуляция БД )
       vector<UCluster> clusters;               //!< Вектор кластеров
-      TFileDispatcher dataBase;                //!< Объект класса необходимый для сохранения информации
+      TFileDispatcher dataBase;                //!< Объект класса необходимый для сохранения и считывания информации (симуляция БД)
 };
 
 #endif // _T_CLOPE_HPP_

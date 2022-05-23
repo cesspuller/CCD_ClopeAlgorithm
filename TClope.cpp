@@ -1,6 +1,8 @@
 #include "TClope.hpp"
+
 //! Алиас для более короткой записи
 using UCluster = shared_ptr<TCluster>;
+
 void TClope::exec()
 {
    double f = 0.0; // PROFIT!
@@ -17,41 +19,44 @@ void TClope::exec()
          clusters.push_back( TCluster::newCluster() );
 
       curentCluster->insertTransaction( transaction );
+      dataBase.writeTransactionInfo( transaction, curentCluster->getId() );
    }
 
    f = profit();
    cout << "Profit = " << f << endl;
 
+   int clusterId = 0;
+
    // Уточняющая фаза алгоритма -
    while( moved ) // Внешний цикл повторения проходов по хранилищу 
    {
-      fileReader->returnStart();
+      dataBase.return2Begin();
 
-      while ( fileReader->getTransaction( transaction ))       // Внутренний цикл, перерасчёт костов и перемещение транзакций
+      while ( !dataBase.readTransactionInfo( transaction, clusterId ) )       // Внутренний цикл, перерасчёт костов и перемещение транзакций
       {
+         curentCluster = clusters[clusterId];
+
          nextCluster = Profit2Stage( transaction, curentCluster );
 
-         if( nextCluster == nullptr )        // >??????????
+         if( nextCluster == nullptr )        // Если выгоднее положить транзакцию в пустой кластер, не нужно её перемещать в пустой кластер
             continue;
 
          if( nextCluster->getId() != curentCluster->getId() )
          {
-            if ( nextCluster->getN() == 0 )
-            {
+            if ( nextCluster->getN() == 0 )       // проверить что в векторе останется по крайней мере 1 пустой кластер
                if ( curentCluster->getN() > 1 )
-               {
                   clusters.push_back( TCluster::newCluster() );
-               }
-            }           // проверить что в векторе останется по крайней мере 1 пустой кластер
 
             curentCluster->deleteTransaction( transaction );
             nextCluster->insertTransaction( transaction );
+            dataBase.overwriteClusterId( nextCluster->getId() );
 
             moved = false; 
          }
       }
 
       f = profit();
+      cout << "Profit = " << f << endl;
       moved = true;
    }
 };
@@ -67,11 +72,11 @@ TClope::TClope( string readerType, string fileName, double r )
    this->r = r;
 };
 
-UCluster& TClope::Profit2Stage( vector<int>& transaction, UCluster& bestCluster )
+UCluster TClope::Profit2Stage( vector<int>& transaction, UCluster& curentCluster )
 {
    double delCost = 0.0;
 
-   delCost = bestCluster->costDel( transaction, r );
+   delCost = curentCluster->costDel( transaction, r );
    shared_ptr<TCluster> curCluster = nullptr;
 
    firstStage( transaction, curCluster, delCost );
@@ -87,7 +92,8 @@ void TClope::firstStage( vector<int>& transaction, UCluster& bestCluster, double
    for ( auto iter = clusters.begin(); iter != clusters.end(); ++iter )
    {
       addCost = ( *iter )->costAdd( transaction, this->r );
-      if ( addCost > maxCost )
+
+      if ( addCost + delCost > maxCost )
       {
          maxCost = addCost + delCost;
          bestCluster = *iter;
