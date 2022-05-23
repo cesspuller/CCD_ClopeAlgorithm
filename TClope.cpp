@@ -47,16 +47,13 @@ void TClope::exec()
             curentCluster->deleteTransaction( transaction );
             nextCluster->insertTransaction( transaction );
 
-            moved = false;
-               
+            moved = false; 
          }
-
       }
+
       f = profit();
       moved = true;
    }
-
-
 };
 
 TClope::TClope( string readerType, string fileName, double r )

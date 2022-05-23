@@ -1,11 +1,12 @@
-#ifndef _T_HPP_READER_
-#define _T_HPP_READER_
+#ifndef _T_READER_HPP_
+#define _T_READER_HPP_
 
 #include <fstream>
 #include <iostream>
+#include <sstream>
+#include <istream>
 #include <vector>
 #include <string>
-#include <sstream>
 #include <algorithm>
 #include "TBaseReader.hpp"
 
@@ -30,20 +31,20 @@ class TReader : public TBaseReader
       //! Функция получения одной транзакции из файла(БД).
       //! transaction - Вектор целочисленных значений считаной транзакции.
       //! return - достигнут ли конец файла 
-      //! false - конец файла не достигнут
-      //! true - конец файла достигнут
+      //!   false - конец файла не достигнут
+      //!   true - конец файла достигнут
       bool getTransaction( vector<int>& transaction ) override;
 
       //! Функция возврата коретки потока ввода в начало файла
       void returnStart() override;
 
    private:
-
-      const unsigned int startPos = 97;    //!< Стартовая позиция буквенного (не заглавного) символа в ASCI таблице
-      const int eAlphaVol = 26;           //!< (english alphabet volume) Количество букв в аглийском алфавите. 
+      
+      const unsigned int startPos = 97;      //!< Стартовая позиция буквенного (не заглавного) символа в ASCI таблице
+      const int eAlphaVol = 26;              //!< (english alphabet volume) Количество букв в аглийском алфавите. 
       string fileName;                       //!< Имя считываемого файла.
       string fileLine;                       //!< Считанная из файла(БД) строка
       ifstream fileManager;                  //!< Объект класса для работы с потоком ввода.
 };
 
-#endif // _T_HPP_READER_
+#endif // _T_READER_HPP_

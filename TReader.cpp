@@ -1,5 +1,4 @@
 #include "TReader.hpp"
-//TODO: надо в этом файле кодировку поправить и во всех остальных для гита
 
 void TReader::setNameFile( string fileName )
 {
@@ -45,14 +44,12 @@ bool TReader::getTransaction( vector<int>& transaction )
             transaction.push_back( data );
          }
       }
-
    };
 
    if ( transaction.size() == 0 )
       return false;
 
    return true;
-
 };
 
 TReader::~TReader()
@@ -63,6 +60,5 @@ TReader::~TReader()
 void TReader::returnStart()
 {
    fileManager.seekg( 0 );
-
 };
 

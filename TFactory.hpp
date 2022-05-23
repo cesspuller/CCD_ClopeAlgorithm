@@ -1,5 +1,5 @@
-#ifndef _T_HPP_FACTORY_READER_
-#define _T_HPP_FACTORY_READER_
+#ifndef _T_FACTORY_READER_HPP_
+#define _T_FACTORY_READER_HPP_
 
 #include <string>
 #include <map>
@@ -81,5 +81,5 @@ class TFactory
    const string mashroomType = "MR";              //!< Идентификатор для класса чтения "задача про грибы"  
 };
 
-#endif // _T_HPP_FACTORY_READER_
+#endif // _T_FACTORY_READER_HPP_
 

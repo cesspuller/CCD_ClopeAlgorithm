@@ -1,10 +1,11 @@
-#ifndef _T_HPP_CLOPE_
-#define _T_HPP_CLOPE_
+#ifndef _T_CLOPE_HPP_
+#define _T_CLOPE_HPP_
 
 #include "vector"
 #include <memory>
 #include "TCluster.hpp"
 #include "TFactory.hpp"
+#include "TFileDispatcher.hpp"
 
 using namespace std;
 
@@ -41,12 +42,12 @@ class TClope
       //! Функция вычисления профита
       double profit();
 
-      bool moved = true;                      //!< Логическая переменная необходима для уточняющих итераций
+      bool moved = true;                       //!< Логическая переменная необходима для уточняющих итераций
       double r = 0;                            //!< Коэффициент отталкивания  
       TFactory factory;                        //!< Объект фабрики создания классов чтения
       TBaseReader* fileReader;                 //!< Указатель на базовый класс объектов ( симуляция БД )
       vector<UCluster> clusters;               //!< Вектор кластеров
-   
+      TFileDispatcher dataBase;                //!< Объект класса необходимый для сохранения информации
 };
 
-#endif // _T_HPP_CLOPE_
+#endif // _T_CLOPE_HPP_

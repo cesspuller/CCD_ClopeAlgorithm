@@ -1,5 +1,5 @@
-#ifndef T_HPP_BASE_READER_
-#define T_HPP_BASE_READER_
+#ifndef T_BASE_READER_HPP_
+#define T_BASE_READER_HPP_
 
 #include <string>
 #include <vector>
@@ -30,5 +30,5 @@ class TBaseReader
 };
 
 
-#endif // T_HPP_BASE_READER_
+#endif // T_HPP_BASE_READER_HPP_
 
