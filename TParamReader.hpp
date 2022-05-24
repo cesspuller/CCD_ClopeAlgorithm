@@ -9,6 +9,30 @@ using namespace std;
 using namespace boost::program_options;
 using namespace boost::filesystem;
 
+//! Структура входных параметров 
+struct TParamStruct
+{
+   public:
+
+      //! Конструктор по умолчанию 
+      TParamStruct() = default;
+
+      //! Деструктор по умолчанию 
+      ~TParamStruct() = default;
+
+      //! "Геттер" коэф-а отталкивания
+      double getR();
+
+      //! "Геттер" имени файла
+      string getFileName();
+
+   private:
+
+      double r = 0.0;      //!< Коэффициент отталкивания 
+      string fileName;     //!< Имя файла
+
+};
+
 //! Класс, реализующий чтение параметров из командной строки
 class TParamReader
 {
@@ -26,6 +50,10 @@ class TParamReader
       //! return - Результат проверки параметров
       int operator()( int argc, char* argv[] );
 
+      //!< Функция передачи в программу введёных в консоль параметров 
+      //!< return - Входные параметры.
+      TParamStruct& getParamStruct();
+
    private:
 
       //! Функция проверки введных параметров на валидность 
@@ -40,6 +68,8 @@ class TParamReader
       options_description genericOption;                            //!< Описание общих опций вводимых в командную строку 
       options_description allOption;                                //!< Описание всех хранимых и доступных опций 
       variables_map variableMaps;                                   //!< Контейнер map с введёными параметрами
+      TParamStruct prStr;                                           //!< Структура входных параметров
+
 
       string fileName;                                              //!< Имя файла, в котором лежат данные подлежащие кластеризации  
 

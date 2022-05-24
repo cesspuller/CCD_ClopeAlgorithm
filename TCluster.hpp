@@ -20,11 +20,11 @@ class TCluster
 
       //! Функция расчёта стоимости добавления транзакции в кластер
       //! return - цена добавления 
-      double costAdd( vector<int>& transaction, double r );
+      [[nodicard]] double costAdd( vector<int>& transaction, double r );
 
       //! Функция расчёта стоимости удаления транзакции из кластер
       //! return - цена удаления 
-      double costDel( vector<int>& transaction, double r );
+      [[nodicard]] double costDel( vector<int>& transaction, double r );
 
       //! Функция добавления транзакции в кластер
       //! transaction - текущая транзакция 

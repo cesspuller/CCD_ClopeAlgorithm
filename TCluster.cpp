@@ -16,8 +16,8 @@ double TCluster::costAdd( vector<int>& transaction, double r )
 
    const map<int, int>::iterator end_Occ = Occ.end();
 
-   int curentS = S + transaction.size();
-   int curentW = W;
+   size_t curentS = S + transaction.size();
+   size_t curentW = W;
    map<int, int>::iterator elem;
 
    for ( int a = 0; a < transaction.size(); ++a )
@@ -42,8 +42,8 @@ double TCluster::costDel( vector<int>& transaction, double r )
 
    const map<int, int>::iterator end_Occ = Occ.end();
 
-   int curentS = S - transaction.size();
-   int curentW = W;
+   long long curentS = S - transaction.size();
+   long long curentW = W;
    map<int, int>::iterator elem;
 
    for ( int a = 0; a < transaction.size(); ++a )

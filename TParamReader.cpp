@@ -13,16 +13,20 @@ int TParamReader::operator()( int argc, char* argv[] )
       return -1;
    }
 
-   if (variableMaps.count( keyInputFile ) )
+   if ( !variableMaps.count( keyInputFile ) )
    {
       cout << allOption << endl;
 
-      throw logic_error( string( "The repuslion must be a positive value rheater than one" ) );
+      cout << "Enter input file!"<< endl;
+
+      return -1;
    }
 
-   if ( variableMaps.count( keyRepulsion ) )
+   if ( !variableMaps.count( keyRepulsion ) )
    {
       cout << allOption << endl;
+
+      cout << "Enter repulsion key !" << endl;
 
       return -1;
    }
@@ -38,8 +42,11 @@ bool TParamReader::checkParam( const variables_map& variableMap )
    fileName = variableMap[keyInputFile].as<string>();                //! TODO: В целом можно добавить проверку на файл 
    r = variableMap[keyRepulsion].as<double>();
 
-   if ( r > 1 )                // Отталкивание должно быть положительным значением больше единицы 
-      throw logic_error( string( "The repuslion must be a positive value rheater than one" ) );
+   if ( r < 1 )                // Отталкивание должно быть положительным значением больше единицы 
+   {
+      cout << "The repuslion must be a positive value rheater than one" << endl;
+      return false;
+   }
 
    return true;
 };
@@ -58,3 +65,19 @@ TParamReader::~TParamReader()
 {
 
 };
+
+TParamStruct& TParamReader::getParamStruct()
+{
+   return prStr;
+};
+
+string TParamStruct::getFileName()
+{
+   return fileName;
+};
+
+double TParamStruct::getR()
+{
+   return r;
+};
+

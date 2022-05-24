@@ -4,17 +4,14 @@
 
 int main( int argc, char* argv[] )
 {
-   //TParamReader paramReader;
-   //
-   //int resultCheck = paramReader( argc, argv );
-   //
-   //if ( resultCheck == -1 )
-   //   exit(0);
+   TParamReader paramReader;
+   
+   if ( paramReader( argc, argv ) == -1 )
+      exit(0);
 
-   TClope clope("MR", "Mashroom.txt", 2.6 );
+   TClope clope( "MR", paramReader.getParamStruct().getFileName(), paramReader.getParamStruct().getR() );
 
    clope.exec();
    
    return  0;
-
 };

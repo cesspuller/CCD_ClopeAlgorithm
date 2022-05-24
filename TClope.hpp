@@ -23,7 +23,7 @@ class TClope
       TClope( string typeReader, string fileName, double r );
 
       //! Функция выполнения кластеризации алгоритмом Clope
-      void exec();
+      [[noreturn]] void exec();
 
       //! Алиас для более короткой записи
       using UCluster = shared_ptr<TCluster>;
@@ -37,7 +37,7 @@ class TClope
       //! transaction - Текущая транзакция.
       //! curentCluster - Текущий кластер
       //! return - ссылка на текущий выбранный кластер, для которого стоимость данной транзакции лучшая 
-      UCluster Profit2Stage( vector<int>& transaction, UCluster& curentCluster );
+      [[nodiscard]] UCluster Profit2Stage( vector<int>& transaction, UCluster& curentCluster );
 
       //! Функция вычисления профита
       double profit();
