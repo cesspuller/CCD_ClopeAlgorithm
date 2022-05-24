@@ -27,10 +27,10 @@ class TClope
       //! Функция выполнения кластеризации алгоритмом Clope
       [[noreturn]] void exec();
 
+   private:
+
       //! Алиас для более короткой записи
       using UCluster = shared_ptr<TCluster>;
-
-   private:
 
       //! Общая реализация формулы вычисления "profit"
       void firstStage( vector<int>& transaction, UCluster& bestCluster, double delCost );
@@ -40,6 +40,9 @@ class TClope
       //! curentCluster - Текущий кластер
       //! return - ссылка на текущий выбранный кластер, для которого стоимость данной транзакции лучшая 
       [[nodiscard]] UCluster Profit2Stage( vector<int>& transaction, UCluster& curentCluster );
+
+      //!< Функция проверяет наличие избыточных пустых кластеров и удаляет их 
+      void deleteEmptyClusters();
 
       //! Функция вычисления профита
       double profit();

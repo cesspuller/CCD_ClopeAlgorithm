@@ -58,6 +58,8 @@ void TClope::exec()
          }
       }
 
+      deleteEmptyClusters();
+
       logInfo.displayProfit( profit() );
 
       if ( logFlag )
@@ -124,3 +126,25 @@ double TClope::profit()
    return ( abs( den ) > 1e-5 ) ? den / num : 0.0;
 };
 
+void TClope::deleteEmptyClusters()                 // FIXME :: по идеи для удаления кластеров можно реализовать тот же механизм 
+{                                                  // что был реаолизован внутри шаред птр с подсчётом ссылок -> вести её в классе кластера
+   auto numberEmptyCluster = 0;                    // и тогда можно будет избавиться от первого цикла в этой функции
+
+   for ( auto& elem : clusters )
+   {
+      if ( elem.get()->getN() == 0 )
+      {
+         ++numberEmptyCluster;
+      }
+   }
+
+   for ( auto n = clusters.end() - 1; n > clusters.begin(); --n )
+   {
+      if ( n->get()->getN() == 0 && numberEmptyCluster > 1 )
+      {
+         clusters.erase( n );
+         --numberEmptyCluster;
+         n = clusters.end();
+      }
+   }
+};
