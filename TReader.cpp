@@ -5,13 +5,13 @@ void TReader::setNameFile( string fileName )
    fileManager.open( fileName );
    char c;
 
-   fileManager >> c;          // ñòåğåòü utf çàãîëîâîê txt
+   fileManager >> c;          // ÑÑ‚ĞµÑ€ĞµÑ‚ÑŒ utf Ğ·Ğ°Ğ³Ğ¾Ğ»Ğ¾Ğ²Ğ¾Ğº txt
    fileManager >> c;
    fileManager >> c;
 
    if ( !fileManager.is_open() )
    {
-      cout << "File is not open. Check him" << endl;             //! TODO: íàïèñàòü ñşäà êîìåíò
+      cout << "File is not open. Check him" << endl;             //! TODO: Ğ½Ğ°Ğ¿Ğ¸ÑĞ°Ñ‚ÑŒ ÑÑĞ´Ğ° ĞºĞ¾Ğ¼ĞµĞ½Ñ‚
       exit( 1 );
    }
 }
@@ -22,8 +22,8 @@ bool TReader::getTransaction( vector<int>& transaction )
    char c;
    int pos = 0;
    getline( fileManager, line );
-   istringstream iss( line );          // ñêîğåå âñåãî ñ îáû÷íîé ñòğèíãîé áóäåò ğàáîòàòü òàê æå 
-   transaction.clear();                // Î÷åíü îïàñíîå ìåñòî - åñëè êàæäûé áîæèé ğàç ïğîèñõîäèò ğåîëîêàöèÿ âåêòîğà òî íàäî ïåğåäåëûâàòü
+   istringstream iss( line );          // ÑĞºĞ¾Ñ€ĞµĞµ Ğ²ÑĞµĞ³Ğ¾ Ñ Ğ¾Ğ±Ñ‹Ñ‡Ğ½Ğ¾Ğ¹ ÑÑ‚Ñ€Ğ¸Ğ½Ğ³Ğ¾Ğ¹ Ğ±ÑƒĞ´ĞµÑ‚ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ğ°Ñ‚ÑŒ Ñ‚Ğ°Ğº Ğ¶Ğµ 
+   transaction.clear();                // ĞÑ‡ĞµĞ½ÑŒ Ğ¾Ğ¿Ğ°ÑĞ½Ğ¾Ğµ Ğ¼ĞµÑÑ‚Ğ¾ - ĞµÑĞ»Ğ¸ ĞºĞ°Ğ¶Ğ´Ñ‹Ğ¹ Ğ±Ğ¾Ğ¶Ğ¸Ğ¹ Ñ€Ğ°Ğ· Ğ¿Ñ€Ğ¾Ğ¸ÑÑ…Ğ¾Ğ´Ğ¸Ñ‚ Ñ€ĞµĞ¾Ğ»Ğ¾ĞºĞ°Ñ†Ğ¸Ñ Ğ²ĞµĞºÑ‚Ğ¾Ñ€Ğ° Ñ‚Ğ¾ Ğ½Ğ°Ğ´Ğ¾ Ğ¿ĞµÑ€ĞµĞ´ĞµĞ»Ñ‹Ğ²Ğ°Ñ‚ÑŒ
    while ( true )
    {
       iss >> c;

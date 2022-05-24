@@ -44,7 +44,7 @@ int TParamReader::operator()( int argc, char* argv[] )
 
 bool TParamReader::checkParam( const variables_map& variableMap )
 {
-   fileName = variableMap[keyInputFile].as<string>();                //! TODO: В целом можно добавить проверку на файл 
+   fileName = variableMap[keyInputFile].as<string>();                //! TODO: Р’ С†РµР»РѕРј РјРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ РїСЂРѕРІРµСЂРєСѓ РЅР° С„Р°Р№Р» 
    r = variableMap[keyRepulsion].as<double>();
    logFlag = variableMap[keyLogFlag].as<int>();
 
@@ -64,7 +64,7 @@ bool TParamReader::checkParam( const variables_map& variableMap )
       return false;
    }
 
-   if ( r < 1 )                // Отталкивание должно быть положительным значением больше единицы 
+   if ( r < 1 )                // РћС‚С‚Р°Р»РєРёРІР°РЅРёРµ РґРѕР»Р¶РЅРѕ Р±С‹С‚СЊ РїРѕР»РѕР¶РёС‚РµР»СЊРЅС‹Рј Р·РЅР°С‡РµРЅРёРµРј Р±РѕР»СЊС€Рµ РµРґРёРЅРёС†С‹ 
    {
       cout << "The repuslion must be a positive value rheater than one" << endl;
       return false;
