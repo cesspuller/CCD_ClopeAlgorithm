@@ -81,6 +81,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)programOption\lib;</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -94,6 +95,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="TClope.cpp" />
     <ClCompile Include="TFileDispatcher.cpp" />
+    <ClCompile Include="TLogInfo.cpp" />
     <ClCompile Include="TParamReader.cpp" />
     <ClCompile Include="TReader.cpp" />
   </ItemGroup>
@@ -103,6 +105,7 @@
     <ClInclude Include="TClope.hpp" />
     <ClInclude Include="TFactory.hpp" />
     <ClInclude Include="TFileDispatcher.hpp" />
+    <ClInclude Include="TLogInfo.hpp" />
     <ClInclude Include="TParamReader.hpp" />
     <ClInclude Include="TReader.hpp" />
   </ItemGroup>

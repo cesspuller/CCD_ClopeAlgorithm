@@ -6,6 +6,7 @@
 #include "TCluster.hpp"
 #include "TFactory.hpp"
 #include "TFileDispatcher.hpp"
+#include "TLogInfo.hpp"
 
 using namespace std;
 
@@ -20,7 +21,8 @@ class TClope
       //! typeReader - Тип объекта чтения.
       //! fileName - Имя читаемого файла.
       //! r - коэффициент отталкивания.
-      TClope( string typeReader, string fileName, double r );
+      //! logFlag - флаг вывода отладочной информации 
+      TClope( string typeReader, string fileName, double r, bool logFlag );
 
       //! Функция выполнения кластеризации алгоритмом Clope
       [[noreturn]] void exec();
@@ -42,12 +44,14 @@ class TClope
       //! Функция вычисления профита
       double profit();
 
-      bool moved = true;                       //!< Логическая переменная необходима для уточняющих итераций
-      double r = 0;                            //!< Коэффициент отталкивания  
       TFactory factory;                        //!< Объект фабрики создания классов чтения
+      TLogInfo logInfo;                        //!< Класс отвечающий за вывод отдадочной информации в консоль
       TBaseReader* fileReader;                 //!< Указатель на базовый класс объектов ( симуляция БД )
       vector<UCluster> clusters;               //!< Вектор кластеров
       TFileDispatcher dataBase;                //!< Объект класса необходимый для сохранения и считывания информации (симуляция БД)
+      double r = 0;                            //!< Коэффициент отталкивания  
+      bool logFlag = false;                    //!< Флаг вывода отладочной информации 
+      bool moved = true;                       //!< Логическая переменная необходима для уточняющих итераций
 };
 
 #endif // _T_CLOPE_HPP_

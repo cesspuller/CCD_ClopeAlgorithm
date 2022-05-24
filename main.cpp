@@ -9,7 +9,7 @@ int main( int argc, char* argv[] )
    if ( paramReader( argc, argv ) == -1 )
       exit(0);
 
-   TClope clope( "MR", paramReader.getParamStruct().getFileName(), paramReader.getParamStruct().getR() );
+   TClope clope( "MR", paramReader.getParamStruct().getFileName(), paramReader.getParamStruct().getR(), paramReader.getParamStruct().getLogFlag() );
 
    clope.exec();
    

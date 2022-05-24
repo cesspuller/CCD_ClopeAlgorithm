@@ -23,12 +23,25 @@ struct TParamStruct
       //! "Геттер" коэф-а отталкивания
       double getR();
 
+      //! "Геттер" флага вывода информации 
+      int getLogFlag();
+
       //! "Геттер" имени файла
       string getFileName();
 
+      //! "Сетер" коэф-а отталкивания
+      void setR( double r);
+
+      //! "Сетер" флага вывода информации 
+      void setLogFlag( int logFlag);
+
+      //! "Сетер" имени файла
+      void setFileName( string fileName );
+
    private:
 
-      double r = 0.0;      //!< Коэффициент отталкивания 
+      double r = 0.0;      //!< Коэффициент отталкивания
+      int logFlag = 0;     //!< Флаг вывода отладочной информации 
       string fileName;     //!< Имя файла
 
 };
@@ -63,8 +76,6 @@ class TParamReader
       //!   false - параметры не валидны 
       bool checkParam( const variables_map& variableMaps );
 
-      double r;                                                     //!< Коэффициент отталкивания 
-
       options_description genericOption;                            //!< Описание общих опций вводимых в командную строку 
       options_description allOption;                                //!< Описание всех хранимых и доступных опций 
       variables_map variableMaps;                                   //!< Контейнер map с введёными параметрами
@@ -82,6 +93,12 @@ class TParamReader
       const string keyRepulsion = "repulsion";                      //!< Коэффициент отталкивания
       const string optionRepulsionCoeff = keyRepulsion + ",r";      //!<
 
+      const string keyLogFlag = "log";                              //!< Отладочная информация
+      const string optionLogFlag = keyLogFlag + ",l";               //!< 
+
+      double r;                                                     //!< Коэффициент отталкивания
+
+      int logFlag = 0;                                              //!< Флаг вывода отладочной информации 
 };
 
 #endif //_T_PARAM_READER_HPP_

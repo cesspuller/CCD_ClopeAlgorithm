@@ -5,7 +5,6 @@ using UCluster = shared_ptr<TCluster>;
 
 void TClope::exec()
 {
-   double f = 0.0; // PROFIT!
    vector<int> transaction;            
    UCluster nextCluster = nullptr;
    UCluster curentCluster = nullptr;
@@ -22,8 +21,10 @@ void TClope::exec()
       dataBase.writeTransactionInfo( transaction, curentCluster->getId() );
    }
 
-   f = profit();
-   cout << "Profit = " << f << endl;
+   logInfo.displayProfit( profit() );
+
+   if ( logFlag )
+      logInfo.displayClusterInfo( clusters );
 
    int clusterId = 0;
 
@@ -57,18 +58,22 @@ void TClope::exec()
          }
       }
 
-      f = profit();
-      cout << "Profit = " << f << endl;
+      logInfo.displayProfit( profit() );
+
+      if ( logFlag )
+         logInfo.displayClusterInfo( clusters );
    }
 };
 
-TClope::TClope( string readerType, string fileName, double r )
+TClope::TClope( string readerType, string fileName, double r, bool logFlag )
 {
    clusters.push_back( TCluster::newCluster() );
 
    fileReader = factory.create( readerType );
 
    fileReader->setNameFile( fileName );
+
+   this->logFlag = logFlag;
 
    this->r = r;
 };
