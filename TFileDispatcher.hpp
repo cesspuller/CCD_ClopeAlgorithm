@@ -36,9 +36,9 @@ class TFileDispatcher
 
    private:
 
+      fstream fileDispatcher;                      //!< поток вывода иформации о кластерах
       fpos<_Mbstatet> startPos;                    //!< Позиция указателя в момент начала чтения 
       fpos<_Mbstatet> stopPos;                     //!< Позиция указателя в момент конца чтения 
-      fstream fileDispatcher;                      //!< поток вывода иформации о кластерах
       const int sep = 0;                           //!< разделитель между транзакциями
 };
 

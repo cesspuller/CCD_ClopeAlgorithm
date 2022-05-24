@@ -30,7 +30,9 @@ void TClope::exec()
    // Уточняющая фаза алгоритма -
    while( moved ) // Внешний цикл повторения проходов по хранилищу 
    {
+      moved = false;
       dataBase.return2Begin();
+
 
       while ( !dataBase.readTransactionInfo( transaction, clusterId ) )       // Внутренний цикл, перерасчёт костов и перемещение транзакций
       {
@@ -38,10 +40,10 @@ void TClope::exec()
 
          nextCluster = Profit2Stage( transaction, curentCluster );
 
-         if( nextCluster == nullptr )        // Если выгоднее положить транзакцию в пустой кластер, не нужно её перемещать в пустой кластер
+         if ( nextCluster == nullptr )        // Если выгоднее положить транзакцию в пустой кластер, не нужно её перемещать в пустой кластер
             continue;
 
-         if( nextCluster->getId() != curentCluster->getId() )
+         if ( nextCluster->getId() != curentCluster->getId() )
          {
             if ( nextCluster->getN() == 0 )       // проверить что в векторе останется по крайней мере 1 пустой кластер
                if ( curentCluster->getN() > 1 )
@@ -51,13 +53,12 @@ void TClope::exec()
             nextCluster->insertTransaction( transaction );
             dataBase.overwriteClusterId( nextCluster->getId() );
 
-            moved = false; 
+            moved = true;
          }
       }
 
       f = profit();
       cout << "Profit = " << f << endl;
-      moved = true;
    }
 };
 

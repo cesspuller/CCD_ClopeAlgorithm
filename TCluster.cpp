@@ -87,7 +87,7 @@ void TCluster::insertTransaction( vector<int>& transaction )
 
 void TCluster::deleteTransaction(vector<int>& transaction)
 {
-   --N;                       // уменьшить кол во транзакций внутри кластера
+   --N;                                           // уменьшить кол во транзакций внутри кластера
    S -= transaction.size();   // уменьшить количество объктов внутри кластера
 
    const map<int, int>::iterator OccEnd = Occ.end();

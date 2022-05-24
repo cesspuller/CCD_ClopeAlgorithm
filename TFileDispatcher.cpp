@@ -36,6 +36,9 @@ bool TFileDispatcher::readTransactionInfo( vector<int>& transaction, int& cluste
 
    fileDispatcher.read( reinterpret_cast< char* >( &clusterId ), sizeof( int ) );
 
+   if ( fileDispatcher.eof() )
+      return true;
+
    while ( tmpVal != 0 && !fileDispatcher.eof() )
    {
       fileDispatcher.read( reinterpret_cast< char* >( &tmpVal ), sizeof( int ) );
@@ -44,7 +47,10 @@ bool TFileDispatcher::readTransactionInfo( vector<int>& transaction, int& cluste
          transaction.push_back( tmpVal );
    };
 
-   stopPos = fileDispatcher.tellp();
+   stopPos = fileDispatcher.tellg();
+   
+   if ( fileDispatcher.eof() )
+      return true;
 
    return false;
 };
@@ -54,10 +60,12 @@ void TFileDispatcher::overwriteClusterId( int clusterId )
    fileDispatcher.seekp( startPos );
    fileDispatcher.write( reinterpret_cast< const char* >( &clusterId ), sizeof( int ) );
    fileDispatcher.seekp( stopPos );
+   fileDispatcher.seekg( stopPos );
 };
 
 void TFileDispatcher::return2Begin()
 {
+   fileDispatcher.clear();
    fileDispatcher.seekp( 0 );
    fileDispatcher.seekg( 0 );
 };
