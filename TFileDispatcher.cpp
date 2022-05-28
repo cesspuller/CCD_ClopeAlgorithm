@@ -5,8 +5,10 @@ TFileDispatcher::TFileDispatcher()
    fileDispatcher.open( "temporary_data_base.bin", ios::binary | ios::out | ios::in );
 
    if ( !fileDispatcher.is_open() )
-      throw logic_error( string( "TMP FILE DOESN'T NOT BE OPEN " ) );
-
+   {
+      cout << "TMP FILE DOESN'T NOT BE OPEN \n Please add file 'temporary_data_base.bin' in folder.";
+      exit(1);
+   }
 };
 
 TFileDispatcher::~TFileDispatcher()
