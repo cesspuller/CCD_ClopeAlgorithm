@@ -118,12 +118,12 @@ double TClope::profit()
    {
       if ( clusters[a]->getN() )
       {
-         den = den + clusters[a]->getN();
-         num = num + clusters[a]->getS() / pow( clusters[a]->getW(), r ) * clusters[a]->getN();
+         den += clusters[a]->getN();
+         num += clusters[a]->getS() / pow( clusters[a]->getW(), r ) * clusters[a]->getN();
       }
    }
    
-   return ( abs( den ) > 1e-5 ) ? den / num : 0.0;
+   return num / den;
 };
 
 void TClope::deleteEmptyClusters()                 // FIXME :: по идеи для удаления кластеров можно реализовать тот же механизм 
